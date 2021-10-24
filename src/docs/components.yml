@@ -36,12 +36,57 @@ components:
           type: string
           enum: [dog, cat]
         breed:
-          type: number
+          type: string
+        sex:
+          type: string
+          enum: [male, female]
+        address:
+          type: string
+      example:
+        id: 7ebac534954b54139806c112
+        name: Firulais
+        age: 2
+        weight: 45
+        description: 'Loves kids!'
+        type: dog
+        breed: chihuahua
+        sex: male
+        address: '1920 Larimer St'
+
+    Adoption:
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          type: string
+        pet:
+          type: string
+        active:
+          type: boolean
       example:
         id: 5ebac534954b54139806c112
-        email: fake@example.com
-        name: fake name
-        role: user
+        user: 6ebac534954b54139806c112
+        pet: 7ebac534954b54139806c112
+        active: true
+
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        user:
+          type: string
+        pet:
+          type: string
+        status:
+          type: string
+          enum: [pending, accepted, rejected, done]
+      example:
+        id: 5ebac534954b54139806c112
+        user: 6ebac534954b54139806c112
+        pet: 7ebac534954b54139806c112
+        status: pending
 
     Token:
       type: object
