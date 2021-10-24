@@ -9,10 +9,9 @@ const router = express.Router();
 router.get('/', validate(userValidation.getUsers), userController.getUsers);
 router.post('/', validate(userValidation.createUser), userController.createUser);
 
-router
-  .get('/:userId', validate(userValidation.getUser), userController.getUser)
-  .patch('/:userId', validate(userValidation.updateUser), userController.updateUser)
-  .delete('/:userId', validate(userValidation.deleteUser), userController.deleteUser);
+router.get('/:userId', validate(userValidation.getUser), userController.getUser);
+router.patch('/:userId', validate(userValidation.updateUser), userController.updateUser);
+router.delete('/:userId', validate(userValidation.deleteUser), userController.deleteUser);
 
 // with Authentication
 // router
