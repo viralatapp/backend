@@ -1,20 +1,28 @@
 const express = require('express');
-const auth = require('../../middlewares/auth');
+// const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const petValidation = require('../../validations/pet.validation');
 const petController = require('../../controllers/pet.controller');
 
 const router = express.Router();
 
-router
-  .post('/', validate(petValidation.createPet), petController.createPet)
-  .get(auth('getPets'), validate(petValidation.getPets), petController.getPets);
+router.get('/', validate(petValidation.getPets), petController.getPets);
+router.post('/', validate(petValidation.createPet), petController.createPet);
 
-router
-  .route('/:petId')
-  .get(auth('getPets'), validate(petValidation.getPet), petController.getPet)
-  .patch(auth('managePets'), validate(petValidation.updatePet), petController.updatePet)
-  .delete(auth('managePets'), validate(petValidation.deletePet), petController.deletePet);
+router.get('/:petId', validate(petValidation.getPet), petController.getPet);
+router.patch('/:petId', validate(petValidation.updatePet), petController.updatePet);
+router.delete('/:petId', validate(petValidation.deletePet), petController.deletePet);
+
+// with Authentication
+// router
+//   .post('/', validate(petValidation.createPet), petController.createPet)
+//   .get(auth('getPets'), validate(petValidation.getPets), petController.getPets);
+
+// router
+//   .route('/:petId')
+//   .get(auth('getPets'), validate(petValidation.getPet), petController.getPet)
+//   .patch(auth('managePets'), validate(petValidation.updatePet), petController.updatePet)
+//   .delete(auth('managePets'), validate(petValidation.deletePet), petController.deletePet);
 
 module.exports = router;
 
