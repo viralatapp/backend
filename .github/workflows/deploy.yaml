@@ -1,3 +1,4 @@
+## DO NOT USE THIS FOR PRODUCTION, THX.
 name: CI/CD
 on: [push, pull_request]
 jobs:
