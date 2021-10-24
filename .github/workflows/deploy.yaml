@@ -26,7 +26,7 @@ jobs:
           SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
 
       - name: Stop the server
-        run: ssh staging 'sudo docker stop viralatapp-backend'
+        run: ssh staging 'sudo docker stop viralatapp-backend && sudo docker rm viralatapp-backend'
 
       - name: Check out the source & build
         run: ssh staging 'cd /home/ec2-user/backend && sudo git fetch && sudo git reset --hard origin/master && sudo docker build -t viralatapp-backend .'
