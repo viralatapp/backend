@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const petTypes = ['dog', 'cat'];
-const sexList = ['male', 'female'];
+const PET_TYPES = ['dog', 'cat'];
+const SEX_LIST = ['male', 'female'];
 
 const petSchema = mongoose.Schema(
   {
@@ -28,7 +28,7 @@ const petSchema = mongoose.Schema(
     },
     type: {
       type: String,
-      enum: petTypes,
+      enum: PET_TYPES,
       default: 'dog',
     },
     race: {
@@ -37,7 +37,7 @@ const petSchema = mongoose.Schema(
     },
     sex: {
       type: String,
-      enum: sexList,
+      enum: SEX_LIST,
       required: true,
     },
     address: {

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
+const STATUS_LIST = ['pending', 'accepted', 'rejected', 'done'];
+
 const applicationSchema = mongoose.Schema(
   {
     user: {
@@ -8,14 +10,15 @@ const applicationSchema = mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    pet: {
+    adoption: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: 'Pet',
+      ref: 'Adoption',
       required: true,
     },
-    active: {
+    status: {
       type: Boolean,
-      default: true,
+      enum: STATUS_LIST,
+      default: 'pending',
     },
   },
   {
