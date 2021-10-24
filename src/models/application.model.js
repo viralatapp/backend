@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
 
-const adoptionSchema = mongoose.Schema(
+const applicationSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.SchemaTypes.ObjectId,
@@ -24,12 +24,12 @@ const adoptionSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-adoptionSchema.plugin(toJSON);
-adoptionSchema.plugin(paginate);
+applicationSchema.plugin(toJSON);
+applicationSchema.plugin(paginate);
 
 /**
- * @typedef Adoption
+ * @typedef Application
  */
-const Adoption = mongoose.model('Adoption', adoptionSchema);
+const Application = mongoose.model('Application', applicationSchema);
 
-module.exports = Adoption;
+module.exports = Application;
