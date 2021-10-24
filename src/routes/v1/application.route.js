@@ -64,7 +64,7 @@ module.exports = router;
  *               type:
  *                  type: string
  *                  enum: [dog, cat]
- *               race:
+ *               breed:
  *                 type: string
  *               sex:
  *                  type: string

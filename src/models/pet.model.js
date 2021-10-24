@@ -31,7 +31,7 @@ const petSchema = mongoose.Schema(
       enum: PET_TYPES,
       default: 'dog',
     },
-    race: {
+    breed: {
       type: String,
       default: 'stray',
     },

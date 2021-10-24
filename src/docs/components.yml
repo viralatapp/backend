@@ -19,6 +19,30 @@ components:
         name: fake name
         role: user
 
+    Pet:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        age:
+          type: number
+        weight:
+          type: number
+        description:
+          type: string
+        type:
+          type: string
+          enum: [dog, cat]
+        breed:
+          type: number
+      example:
+        id: 5ebac534954b54139806c112
+        email: fake@example.com
+        name: fake name
+        role: user
+
     Token:
       type: object
       properties:
