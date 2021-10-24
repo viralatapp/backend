@@ -1,0 +1,36 @@
+name: CI/CD
+on: [push, pull_request]
+jobs:
+  # build:
+  deploy:
+    name: 'Deploy'
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # needs: build
+    steps:
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/staging.key
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+
+      - name: Stop the server
+        run: ssh staging 'sudo docker stop viralatapp-backend'
+
+      - name: Check out the source & build
+        run: ssh staging 'cd /home/ec2-user/backend && git fetch && git reset --hard origin/master && sudo docker build -t viralatapp-backend .'
+
+      - name: Start the server
+        if: ${{ always() }}
+        run: ssh staging 'sudo docker run --name viralatapp-backend -itd -p 3000:80 viralatapp-backend'
