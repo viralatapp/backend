@@ -3,11 +3,24 @@ const { Pet } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
+ * Get pet by id
+ * @param {ObjectId} id
+ * @returns {Promise<Pet>}
+ */
+const getPetById = async (id) => {
+  return Pet.findById(id);
+};
+
+/**
  * Create a pet
  * @param {Object} petBody
  * @returns {Promise<Pet>}
  */
 const createPet = async (petBody) => {
+  const user = await getPetById(petBody.user);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'No user found with this Id.');
+  }
   return Pet.create(petBody);
 };
 
@@ -23,15 +36,6 @@ const createPet = async (petBody) => {
 const queryPets = async (filter, options) => {
   const pets = await Pet.paginate(filter, options);
   return pets;
-};
-
-/**
- * Get pet by id
- * @param {ObjectId} id
- * @returns {Promise<Pet>}
- */
-const getPetById = async (id) => {
-  return Pet.findById(id);
 };
 
 /**

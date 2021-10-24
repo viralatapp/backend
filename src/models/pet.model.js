@@ -6,6 +6,11 @@ const sexList = ['male', 'female'];
 
 const petSchema = mongoose.Schema(
   {
+    user: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -13,11 +18,9 @@ const petSchema = mongoose.Schema(
     },
     age: {
       type: Number,
-      required: true,
     },
     weight: {
       type: Number,
-      required: true,
     },
     description: {
       type: String,
@@ -35,7 +38,7 @@ const petSchema = mongoose.Schema(
     sex: {
       type: String,
       enum: sexList,
-      default: 'male',
+      required: true,
     },
     address: {
       type: String,
