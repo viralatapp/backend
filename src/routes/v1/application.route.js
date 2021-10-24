@@ -1,28 +1,28 @@
 const express = require('express');
 // const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
-const adoptionValidation = require('../../validations/adoption.validation');
-const adoptionController = require('../../controllers/adoption.controller');
+const applicationValidation = require('../../validations/application.validation');
+const applicationController = require('../../controllers/application.controller');
 
 const router = express.Router();
 
-router.get('/', validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
-router.post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption);
+router.get('/', validate(applicationValidation.getApplications), applicationController.getApplications);
+router.post('/', validate(applicationValidation.createApplication), applicationController.createApplication);
 
-router.get('/:adoptionId', validate(adoptionValidation.getAdoption), adoptionController.getAdoption);
-router.patch('/:adoptionId', validate(adoptionValidation.updateAdoption), adoptionController.updateAdoption);
-router.delete('/:adoptionId', validate(adoptionValidation.deleteAdoption), adoptionController.deleteAdoption);
+router.get('/:applicationId', validate(applicationValidation.getApplication), applicationController.getApplication);
+router.patch('/:applicationId', validate(applicationValidation.updateApplication), applicationController.updateApplication);
+router.delete('/:applicationId', validate(applicationValidation.deleteApplication), applicationController.deleteApplication);
 
 // with Authentication
 // router
-//   .post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption)
-//   .get(auth('getAdoptions'), validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
+//   .post('/', validate(applicationValidation.createApplication), applicationController.createApplication)
+//   .get(auth('getApplications'), validate(applicationValidation.getApplications), applicationController.getApplications);
 
 // router
-//   .route('/:adoptionId')
-//   .get(auth('getAdoptions'), validate(adoptionValidation.getAdoption), adoptionController.getAdoption)
-//   .patch(auth('manageAdoptions'), validate(adoptionValidation.updateAdoption), adoptionController.updateAdoption)
-//   .delete(auth('manageAdoptions'), validate(adoptionValidation.deleteAdoption), adoptionController.deleteAdoption);
+//   .route('/:applicationId')
+//   .get(auth('getApplications'), validate(applicationValidation.getApplication), applicationController.getApplication)
+//   .patch(auth('manageApplications'), validate(applicationValidation.updateApplication), applicationController.updateApplication)
+//   .delete(auth('manageApplications'), validate(applicationValidation.deleteApplication), applicationController.deleteApplication);
 
 module.exports = router;
 
