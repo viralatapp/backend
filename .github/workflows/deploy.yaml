@@ -34,4 +34,4 @@ jobs:
 
       - name: Start the server
         if: ${{ always() }}
-        run: ssh staging 'sudo docker run --name viralatapp-backend -itd -p 3000:80 viralatapp-backend'
+        run: ssh staging 'sudo docker run --name viralatapp-backend -d -p 80:3000 viralatapp-backend'
