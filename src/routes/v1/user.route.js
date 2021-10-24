@@ -53,7 +53,6 @@ module.exports = router;
  *               - name
  *               - email
  *               - password
- *               - role
  *             properties:
  *               name:
  *                 type: string
@@ -68,6 +67,7 @@ module.exports = router;
  *                 description: At least one number and one letter
  *               role:
  *                  type: string
+ *                  required: false
  *                  enum: [user, admin]
  *             example:
  *               name: fake name
