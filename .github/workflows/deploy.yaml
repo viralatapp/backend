@@ -29,7 +29,7 @@ jobs:
         run: ssh staging 'sudo docker stop viralatapp-backend'
 
       - name: Check out the source & build
-        run: ssh staging 'cd /home/ec2-user/backend && git fetch && git reset --hard origin/master && sudo docker build -t viralatapp-backend .'
+        run: ssh staging 'cd /home/ec2-user/backend && sudo git fetch && sudo git reset --hard origin/master && sudo docker build -t viralatapp-backend .'
 
       - name: Start the server
         if: ${{ always() }}
