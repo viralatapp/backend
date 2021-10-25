@@ -1,28 +1,37 @@
 const express = require('express');
-// const auth = require('../../middlewares/auth');
+const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const applicationValidation = require('../../validations/application.validation');
 const applicationController = require('../../controllers/application.controller');
 
 const router = express.Router();
 
-router.get('/', validate(applicationValidation.getApplications), applicationController.getApplications);
-router.post('/', validate(applicationValidation.createApplication), applicationController.createApplication);
+// with Authentication
+// router.get('/', validate(applicationValidation.getApplications), applicationController.getApplications);
+// router.post('/', validate(applicationValidation.createApplication), applicationController.createApplication);
 
-router.get('/:applicationId', validate(applicationValidation.getApplication), applicationController.getApplication);
-router.patch('/:applicationId', validate(applicationValidation.updateApplication), applicationController.updateApplication);
-router.delete('/:applicationId', validate(applicationValidation.deleteApplication), applicationController.deleteApplication);
+// router.get('/:applicationId', validate(applicationValidation.getApplication), applicationController.getApplication);
+// router.patch('/:applicationId', validate(applicationValidation.updateApplication), applicationController.updateApplication);
+// router.delete('/:applicationId', validate(applicationValidation.deleteApplication), applicationController.deleteApplication);
 
 // with Authentication
-// router
-//   .post('/', validate(applicationValidation.createApplication), applicationController.createApplication)
-//   .get(auth('getApplications'), validate(applicationValidation.getApplications), applicationController.getApplications);
+router
+  .post('/', validate(applicationValidation.createApplication), applicationController.createApplication)
+  .get(auth('getApplications'), validate(applicationValidation.getApplications), applicationController.getApplications);
 
-// router
-//   .route('/:applicationId')
-//   .get(auth('getApplications'), validate(applicationValidation.getApplication), applicationController.getApplication)
-//   .patch(auth('manageApplications'), validate(applicationValidation.updateApplication), applicationController.updateApplication)
-//   .delete(auth('manageApplications'), validate(applicationValidation.deleteApplication), applicationController.deleteApplication);
+router
+  .route('/:applicationId')
+  .get(auth('getApplications'), validate(applicationValidation.getApplication), applicationController.getApplication)
+  .patch(
+    auth('manageApplications'),
+    validate(applicationValidation.updateApplication),
+    applicationController.updateApplication
+  )
+  .delete(
+    auth('manageApplications'),
+    validate(applicationValidation.deleteApplication),
+    applicationController.deleteApplication
+  );
 
 module.exports = router;
 

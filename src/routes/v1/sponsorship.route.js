@@ -1,28 +1,37 @@
 const express = require('express');
-// const auth = require('../../middlewares/auth');
+const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const sponsorshipValidation = require('../../validations/sponsorship.validation');
 const sponsorshipController = require('../../controllers/sponsorship.controller');
 
 const router = express.Router();
 
-router.get('/', validate(sponsorshipValidation.getSponsorships), sponsorshipController.getSponsorships);
-router.post('/', validate(sponsorshipValidation.createSponsorship), sponsorshipController.createSponsorship);
+// without Authentication
+// router.get('/', validate(sponsorshipValidation.getSponsorships), sponsorshipController.getSponsorships);
+// router.post('/', validate(sponsorshipValidation.createSponsorship), sponsorshipController.createSponsorship);
 
-router.get('/:sponsorshipId', validate(sponsorshipValidation.getSponsorship), sponsorshipController.getSponsorship);
-router.patch('/:sponsorshipId', validate(sponsorshipValidation.updateSponsorship), sponsorshipController.updateSponsorship);
-router.delete('/:sponsorshipId', validate(sponsorshipValidation.deleteSponsorship), sponsorshipController.deleteSponsorship);
+// router.get('/:sponsorshipId', validate(sponsorshipValidation.getSponsorship), sponsorshipController.getSponsorship);
+// router.patch('/:sponsorshipId', validate(sponsorshipValidation.updateSponsorship), sponsorshipController.updateSponsorship);
+// router.delete('/:sponsorshipId', validate(sponsorshipValidation.deleteSponsorship), sponsorshipController.deleteSponsorship);
 
 // with Authentication
-// router
-//   .post('/', validate(sponsorshipValidation.createSponsorship), sponsorshipController.createSponsorship)
-//   .get(auth('getSponsorships'), validate(sponsorshipValidation.getSponsorships), sponsorshipController.getSponsorships);
+router
+  .post('/', validate(sponsorshipValidation.createSponsorship), sponsorshipController.createSponsorship)
+  .get(auth('getSponsorships'), validate(sponsorshipValidation.getSponsorships), sponsorshipController.getSponsorships);
 
-// router
-//   .route('/:sponsorshipId')
-//   .get(auth('getSponsorships'), validate(sponsorshipValidation.getSponsorship), sponsorshipController.getSponsorship)
-//   .patch(auth('manageSponsorships'), validate(sponsorshipValidation.updateSponsorship), sponsorshipController.updateSponsorship)
-//   .delete(auth('manageSponsorships'), validate(sponsorshipValidation.deleteSponsorship), sponsorshipController.deleteSponsorship);
+router
+  .route('/:sponsorshipId')
+  .get(auth('getSponsorships'), validate(sponsorshipValidation.getSponsorship), sponsorshipController.getSponsorship)
+  .patch(
+    auth('manageSponsorships'),
+    validate(sponsorshipValidation.updateSponsorship),
+    sponsorshipController.updateSponsorship
+  )
+  .delete(
+    auth('manageSponsorships'),
+    validate(sponsorshipValidation.deleteSponsorship),
+    sponsorshipController.deleteSponsorship
+  );
 
 module.exports = router;
 

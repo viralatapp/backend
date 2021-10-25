@@ -10,7 +10,7 @@ const createApplication = catchAsync(async (req, res) => {
 });
 
 const getApplications = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name', 'type']);
+  const filter = pick(req.query, ['user', 'pet']);
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
   const result = await applicationService.queryApplications(filter, options);
   res.send(result);

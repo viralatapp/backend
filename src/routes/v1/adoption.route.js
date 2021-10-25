@@ -1,28 +1,29 @@
 const express = require('express');
-// const auth = require('../../middlewares/auth');
+const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const adoptionValidation = require('../../validations/adoption.validation');
 const adoptionController = require('../../controllers/adoption.controller');
 
 const router = express.Router();
 
-router.get('/', validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
-router.post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption);
+// Without Authentication
+// router.get('/', validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
+// router.post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption);
 
-router.get('/:adoptionId', validate(adoptionValidation.getAdoption), adoptionController.getAdoption);
-router.patch('/:adoptionId', validate(adoptionValidation.updateAdoption), adoptionController.updateAdoption);
-router.delete('/:adoptionId', validate(adoptionValidation.deleteAdoption), adoptionController.deleteAdoption);
+// router.get('/:adoptionId', validate(adoptionValidation.getAdoption), adoptionController.getAdoption);
+// router.patch('/:adoptionId', validate(adoptionValidation.updateAdoption), adoptionController.updateAdoption);
+// router.delete('/:adoptionId', validate(adoptionValidation.deleteAdoption), adoptionController.deleteAdoption);
 
 // with Authentication
-// router
-//   .post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption)
-//   .get(auth('getAdoptions'), validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
+router
+  .post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption)
+  .get(auth('getAdoptions'), validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
 
-// router
-//   .route('/:adoptionId')
-//   .get(auth('getAdoptions'), validate(adoptionValidation.getAdoption), adoptionController.getAdoption)
-//   .patch(auth('manageAdoptions'), validate(adoptionValidation.updateAdoption), adoptionController.updateAdoption)
-//   .delete(auth('manageAdoptions'), validate(adoptionValidation.deleteAdoption), adoptionController.deleteAdoption);
+router
+  .route('/:adoptionId')
+  .get(auth('getAdoptions'), validate(adoptionValidation.getAdoption), adoptionController.getAdoption)
+  .patch(auth('manageAdoptions'), validate(adoptionValidation.updateAdoption), adoptionController.updateAdoption)
+  .delete(auth('manageAdoptions'), validate(adoptionValidation.deleteAdoption), adoptionController.deleteAdoption);
 
 module.exports = router;
 
