@@ -3,6 +3,15 @@ const { toJSON, paginate } = require('./plugins');
 
 const STATUS_LIST = ['pending', 'accepted', 'rejected', 'done'];
 
+const questionSchema = mongoose.Schema({
+  question: {
+    type: String,
+  },
+  answer: {
+    type: String,
+  },
+});
+
 const applicationSchema = mongoose.Schema(
   {
     user: {
@@ -15,6 +24,7 @@ const applicationSchema = mongoose.Schema(
       ref: 'Adoption',
       required: true,
     },
+    questions: [questionSchema],
     status: {
       type: Boolean,
       enum: STATUS_LIST,
