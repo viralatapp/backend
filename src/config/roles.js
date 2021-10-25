@@ -1,5 +1,6 @@
 const allRoles = {
   user: ['getPets', 'managePets'],
+  refuge: ['getPets', 'managePets'],
   admin: ['getUsers', 'manageUsers'],
 };
 
