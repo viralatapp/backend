@@ -16,7 +16,8 @@ const router = express.Router();
 
 // with Authentication
 router
-  .post('/', validate(adoptionValidation.createAdoption), adoptionController.createAdoption)
+  .route('/')
+  .post(auth('manageAdoptions'), validate(adoptionValidation.createAdoption), adoptionController.createAdoption)
   .get(auth('getAdoptions'), validate(adoptionValidation.getAdoptions), adoptionController.getAdoptions);
 
 router

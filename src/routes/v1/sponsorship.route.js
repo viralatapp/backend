@@ -16,7 +16,12 @@ const router = express.Router();
 
 // with Authentication
 router
-  .post('/', validate(sponsorshipValidation.createSponsorship), sponsorshipController.createSponsorship)
+  .route('/')
+  .post(
+    auth('manageSponsorships'),
+    validate(sponsorshipValidation.createSponsorship),
+    sponsorshipController.createSponsorship
+  )
   .get(auth('getSponsorships'), validate(sponsorshipValidation.getSponsorships), sponsorshipController.getSponsorships);
 
 router

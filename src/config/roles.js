@@ -1,7 +1,36 @@
 const allRoles = {
-  user: ['getPets', 'managePets'],
-  refuge: ['getPets', 'managePets'],
-  admin: ['getUsers', 'manageUsers', 'getPets', 'managePets'],
+  user: [
+    'getPets',
+    'managePets',
+    'getApplications',
+    'manageApplications',
+    'manageAdoptions',
+    'manageAdoptions',
+    'getSponsorships',
+    'manageSponsorships',
+  ],
+  refuge: [
+    'getPets',
+    'managePets',
+    'getApplications',
+    'manageApplications',
+    'manageAdoptions',
+    'manageAdoptions',
+    'getSponsorships',
+    'manageSponsorships',
+  ],
+  admin: [
+    'getUsers',
+    'manageUsers',
+    'getPets',
+    'managePets',
+    'getApplications',
+    'manageApplications',
+    'manageAdoptions',
+    'manageAdoptions',
+    'getSponsorships',
+    'manageSponsorships',
+  ],
 };
 
 const roles = Object.keys(allRoles);

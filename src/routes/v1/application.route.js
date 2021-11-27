@@ -16,7 +16,12 @@ const router = express.Router();
 
 // with Authentication
 router
-  .post('/', validate(applicationValidation.createApplication), applicationController.createApplication)
+  .route('/')
+  .post(
+    auth('manageApplications'),
+    validate(applicationValidation.createApplication),
+    applicationController.createApplication
+  )
   .get(auth('getApplications'), validate(applicationValidation.getApplications), applicationController.getApplications);
 
 router
