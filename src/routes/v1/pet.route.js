@@ -16,7 +16,8 @@ const router = express.Router();
 
 // with Authentication
 router
-  .post('/', validate(petValidation.createPet), petController.createPet)
+  .route('/')
+  .post(auth('managePets'), validate(petValidation.createPet), petController.createPet)
   .get(auth('getPets'), validate(petValidation.getPets), petController.getPets);
 
 router
