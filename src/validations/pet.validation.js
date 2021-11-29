@@ -3,6 +3,7 @@ const { objectId } = require('./custom.validation');
 
 const createPet = {
   body: Joi.object().keys({
+    user: Joi.required().custom(objectId),
     name: Joi.string().required(),
     age: Joi.number(),
     weight: Joi.number(),
@@ -16,6 +17,7 @@ const createPet = {
 
 const getPets = {
   query: Joi.object().keys({
+    user: Joi.custom(objectId),
     name: Joi.string(),
     role: Joi.string(),
     sortBy: Joi.string(),
