@@ -44,6 +44,11 @@ const petSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    images: [
+      {
+        type: String,
+      },
+    ],
   },
   {
     timestamps: true,
