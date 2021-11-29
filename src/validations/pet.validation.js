@@ -12,6 +12,7 @@ const createPet = {
     type: Joi.string().required().valid('dog', 'cat'),
     sex: Joi.string().required().valid('male', 'female'),
     address: Joi.string().required(),
+    images: Joi.array(),
   }),
 };
 
@@ -46,6 +47,7 @@ const updatePet = {
       type: Joi.string().valid('dog', 'cat'),
       sex: Joi.string().valid('male', 'female'),
       address: Joi.string(),
+      images: Joi.array(),
     })
     .min(1),
 };
