@@ -17,10 +17,6 @@ const getPetById = async (id) => {
  * @returns {Promise<Pet>}
  */
 const createPet = async (petBody) => {
-  const user = await getPetById(petBody.user);
-  if (!user) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'No user found with this Id.');
-  }
   return Pet.create(petBody);
 };
 
