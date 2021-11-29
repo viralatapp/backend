@@ -26,7 +26,7 @@ const applicationSchema = mongoose.Schema(
     },
     questions: [questionSchema],
     status: {
-      type: Boolean,
+      type: String,
       enum: STATUS_LIST,
       default: 'pending',
     },

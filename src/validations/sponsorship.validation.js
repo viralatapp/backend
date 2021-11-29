@@ -6,7 +6,7 @@ const createSponsorship = {
     user: Joi.required().custom(objectId),
     pet: Joi.required().custom(objectId),
     validUntil: Joi.required().date(),
-    paymentMethod: Joi.required().date(),
+    paymentMethod: Joi.required().string(),
   }),
 };
 
@@ -14,7 +14,7 @@ const getSponsorships = {
   query: Joi.object().keys({
     user: Joi.custom(objectId),
     pet: Joi.custom(objectId),
-    paymentMethod: Joi.date(),
+    paymentMethod: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -36,7 +36,7 @@ const updateSponsorship = {
       user: Joi.custom(objectId),
       pet: Joi.custom(objectId),
       validUntil: Joi.date(),
-      paymentMethod: Joi.date(),
+      paymentMethod: Joi.string(),
     })
     .min(1),
 };

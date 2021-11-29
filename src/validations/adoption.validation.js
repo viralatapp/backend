@@ -5,6 +5,7 @@ const createAdoption = {
   body: Joi.object().keys({
     user: Joi.required().custom(objectId),
     pet: Joi.required().custom(objectId),
+    active: Joi.boolean().required(),
   }),
 };
 
@@ -12,6 +13,7 @@ const getAdoptions = {
   query: Joi.object().keys({
     user: Joi.custom(objectId),
     pet: Joi.custom(objectId),
+    active: Joi.boolean(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -32,6 +34,7 @@ const updateAdoption = {
     .keys({
       user: Joi.custom(objectId),
       pet: Joi.custom(objectId),
+      active: Joi.boolean(),
     })
     .min(1),
 };

@@ -5,6 +5,8 @@ const createApplication = {
   body: Joi.object().keys({
     user: Joi.required().custom(objectId),
     adoption: Joi.required().custom(objectId),
+    questions: Joi.array().required(),
+    status: Joi.string(),
   }),
 };
 
@@ -12,7 +14,7 @@ const getApplications = {
   query: Joi.object().keys({
     user: Joi.custom(objectId),
     adoption: Joi.custom(objectId),
-    status: Joi.bool(),
+    status: Joi.string(),
     sortBy: Joi.string(),
     limit: Joi.number().integer(),
     page: Joi.number().integer(),
@@ -33,6 +35,7 @@ const updateApplication = {
     .keys({
       user: Joi.custom(objectId),
       adoption: Joi.custom(objectId),
+      status: Joi.string(),
     })
     .min(1),
 };
