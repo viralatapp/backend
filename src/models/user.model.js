@@ -23,6 +23,15 @@ const userSchema = mongoose.Schema(
     country: {
       type: String,
     },
+    phone: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,
